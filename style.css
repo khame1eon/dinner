@@ -1,0 +1,49 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.inputs {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.inputs input {
+  padding: 8px;
+  width: 80px;
+}
+
+.roulette-container {
+  position: relative;
+  width: 90vw;
+  max-width: 400px;
+  margin: auto;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+#spinBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px 20px;
+  border-radius: 50%;
+  border: none;
+  background: black;
+  color: white;
+  font-size: 16px;
+}
