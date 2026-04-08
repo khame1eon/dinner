@@ -69,13 +69,13 @@ function animate() {
 
 function startSpin() {
   if (!spinning) {
-    speed = Math.random() * 0.3 + 0.3;
+    speed = Math.random() * 0.5 + 0.6; // 룰렛 회전 속도 조절
     spinning = true;
   }
 }
 
 function stopSpin() {
-  speed *= 0.95;
+  speed *= 0.97 + Math.random() * 0.02; // 카지노 느낌으로 룰렛 회전
 }
 
 function alertResult() {
