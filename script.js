@@ -96,12 +96,15 @@ function showResult() {
   const items = getItems();
   const arc = (2 * Math.PI) / items.length;
 
+  // 각도 정규화
   let normalized = angle % (2 * Math.PI);
   if (normalized < 0) normalized += 2 * Math.PI;
 
-  const pointerAngle = (2 * Math.PI - normalized + Math.PI / 2) % (2 * Math.PI);
-  let index = Math.floor(pointerAngle / arc);
-  index = index % items.length;
+  // 🎯 핵심: 포인터는 "12시 방향 = -π/2"
+  const pointerAngle = (normalized + Math.PI / 2) % (2 * Math.PI);
+
+  // 인덱스 계산 (반시계 → 시계 방향 보정)
+  let index = Math.floor((2 * Math.PI - pointerAngle) / arc) % items.length;
 
   const result = items[index];
   showOverlay(result);
