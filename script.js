@@ -43,8 +43,11 @@ function drawRoulette() {
     ctx.save();
     ctx.translate(200, 200);
     ctx.rotate(start + arc / 2);
-    ctx.fillStyle = "#000";
-    ctx.fillText(item, 100, 5);
+ctx.fillStyle = "#000";
+ctx.font = "bold 20px sans-serif";  // ⭐ 크기 조절
+ctx.textAlign = "center";           // ⭐ 중앙 정렬
+ctx.textBaseline = "middle";        // ⭐ 수직 정렬
+ctx.fillText(item, 120, 0);         // 위치도 살짝 바깥으로
     ctx.restore();
   });
 }
