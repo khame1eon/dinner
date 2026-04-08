@@ -75,7 +75,7 @@ function startSpin() {
 }
 
 function stopSpin() {
-  speed *= 0.97 + Math.random() * 0.02; // 카지노 느낌으로 룰렛 회전
+  speed *= 0.995; // 더 빠르게 오래 돌리기
 }
 
 function alertResult() {
