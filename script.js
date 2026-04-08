@@ -10,8 +10,21 @@ let speed = 0;
 
 const inputs = document.querySelectorAll(".inputs input");
 
+const colors = [
+  "#FF6B6B",
+  "#FFD93D",
+  "#6BCB77",
+  "#4D96FF",
+  "#B983FF",
+  "#FF9F1C",
+  "#2EC4B6",
+  "#E71D36"
+];
+
 function getItems() {
-  return Array.from(inputs).map(i => i.value || "메뉴");
+  return Array.from(inputs)
+    .map(i => i.value.trim())
+    .filter(v => v !== "");
 }
 
 function drawRoulette() {
@@ -26,7 +39,7 @@ function drawRoulette() {
     ctx.beginPath();
     ctx.moveTo(200, 200);
     ctx.arc(200, 200, 200, start, start + arc);
-    ctx.fillStyle = i % 2 === 0 ? "#ffcc00" : "#ff6666";
+    ctx.fillStyle = colors[i % colors.length];
     ctx.fill();
 
     ctx.save();
@@ -67,8 +80,22 @@ function stopSpin() {
 function alertResult() {
   const items = getItems();
   const arc = (2 * Math.PI) / items.length;
-  const index = Math.floor(((2 * Math.PI - angle) % (2 * Math.PI)) / arc);
-  alert("오늘 저녁은: " + items[index]);
+
+  // 각도 정규화 (0 ~ 2π)
+  let normalized = angle % (2 * Math.PI);
+  if (normalized < 0) normalized += 2 * Math.PI;
+
+  // 포인터 기준 보정 (위쪽 기준)
+  const pointerAngle = (2 * Math.PI - normalized + Math.PI / 2) % (2 * Math.PI);
+
+  let index = Math.floor(pointerAngle / arc);
+
+  // 안전 처리 (undefined 방지)
+  index = index % items.length;
+
+  const result = items[index] || "결과 없음";
+
+  alert("오늘 저녁은: " + result);
 }
 
 document.getElementById("spinBtn").addEventListener("click", startSpin);
