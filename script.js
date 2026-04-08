@@ -22,9 +22,7 @@ const colors = [
 ];
 
 function getItems() {
-  return Array.from(inputs)
-    .map(i => i.value.trim())
-    .filter(v => v !== "");
+  return Array.from(inputs).map(i => i.value.trim() || "메뉴");
 }
 
 function drawRoulette() {
@@ -88,10 +86,11 @@ function alertResult() {
   // 포인터 기준 보정 (위쪽 기준)
   const pointerAngle = (2 * Math.PI - normalized + Math.PI / 2) % (2 * Math.PI);
 
-  let index = Math.floor(pointerAngle / arc);
+let index = Math.floor(pointerAngle / arc);
 
-  // 안전 처리 (undefined 방지)
-  index = index % items.length;
+// 안전 보정
+if (index < 0) index = 0;
+if (index >= items.length) index = items.length - 1;
 
   const result = items[index] || "결과 없음";
 
@@ -102,6 +101,11 @@ document.getElementById("spinBtn").addEventListener("click", startSpin);
 canvas.addEventListener("click", stopSpin);
 canvas.addEventListener("touchstart", stopSpin);
 
-inputs.forEach(input => input.addEventListener("input", drawRoulette));
+inputs.forEach(input => 
+  input.addEventListener("input", () => {
+    angle = 0;
+    drawRoulette();
+  })
+);
 
 animate();
