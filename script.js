@@ -97,7 +97,7 @@ if (index >= items.length) index = items.length - 1;
 
   const result = items[index] || "결과 없음";
 
-  alert("오늘 저녁은: " + result);
+  alert("오늘 저녁은: " + result "닷!");
 }
 
 document.getElementById("spinBtn").addEventListener("click", startSpin);
